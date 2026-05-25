@@ -1,0 +1,104 @@
+{
+  "info": {
+    "name": "TruthLens Fake News API",
+    "_postman_id": "truthlens-v1",
+    "description": "Complete test collection for the TruthLens Fake News Detection API.\n\nBase URL: http://localhost:8000\n\nBefore testing:\n1. Start server:  python main.py\n2. Set the `base_url` variable below if your port differs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Liveness Check",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/health/",
+            "description": "Returns 200 immediately. Used by load balancers."
+          }
+        },
+        {
+          "name": "Readiness Check",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/health/ready",
+            "description": "Returns 200 only when model + vectorizer are loaded."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Predict",
+      "item": [
+        {
+          "name": "Fake News Example",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/predict/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"SHOCKING: Scientists CONFIRM that vaccines contain microchips to track every citizen! Mainstream media is hiding the truth. Share before this gets removed!\"\n}"
+            },
+            "description": "Expected: Fake | HIGH risk"
+          }
+        },
+        {
+          "name": "Real News Example",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/predict/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"The Federal Reserve raised its benchmark interest rate by 25 basis points on Wednesday, as policymakers continue efforts to bring inflation back to the 2 percent target amid a resilient labor market.\"\n}"
+            },
+            "description": "Expected: Real | LOW risk"
+          }
+        },
+        {
+          "name": "Empty Text — Validation Error",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/predict/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"\"\n}"
+            },
+            "description": "Expected: 422 validation error"
+          }
+        },
+        {
+          "name": "Missing Field — Schema Error",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/predict/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "description": "Expected: 422 — text field is required"
+          }
+        },
+        {
+          "name": "Too Short — Validation Error",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/predict/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"hi\"\n}"
+            },
+            "description": "Expected: 422 — text too short"
+          }
+        }
+      ]
+    }
+  ]
+}

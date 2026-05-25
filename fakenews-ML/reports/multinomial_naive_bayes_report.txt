@@ -1,0 +1,17 @@
+Model: Multinomial Naive Bayes
+Accuracy: 0.966592
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    Fake (0)     0.9675    0.9687    0.9681      4696
+    Real (1)     0.9656    0.9643    0.9650      4284
+
+    accuracy                         0.9666      8980
+   macro avg     0.9665    0.9665    0.9665      8980
+weighted avg     0.9666    0.9666    0.9666      8980
+
+
+Confusion Matrix:
+[[4549  147]
+ [ 153 4131]]

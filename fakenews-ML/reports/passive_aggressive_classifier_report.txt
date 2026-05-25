@@ -1,0 +1,17 @@
+Model: Passive Aggressive Classifier
+Accuracy: 0.997550
+
+Classification Report:
+              precision    recall  f1-score   support
+
+    Fake (0)     0.9989    0.9964    0.9977      4696
+    Real (1)     0.9960    0.9988    0.9974      4284
+
+    accuracy                         0.9976      8980
+   macro avg     0.9975    0.9976    0.9975      8980
+weighted avg     0.9976    0.9976    0.9976      8980
+
+
+Confusion Matrix:
+[[4679   17]
+ [   5 4279]]
