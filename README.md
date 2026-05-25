@@ -99,33 +99,6 @@ GitHub
 VS Code
 Postman
 
-📂 Project Structure
-fake-news-detector-ai/
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── vite.config.js
-│
-├── backend/
-│   ├── app/
-│   │   ├── routes/
-│   │   ├── utils/
-│   │   ├── middleware/
-│   │   └── models/
-│   ├── requirements.txt
-│   └── main.py
-│
-├── ml/
-│   ├── src/
-│   ├── data/
-│   ├── models/
-│   └── reports/
-│
-├── README.md
-└── .gitignore
-
 📈 ML Pipeline
 1. Data Collection
 Fake.csv
